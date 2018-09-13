@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CoPiloto.Services.Navigation;
+using CoPiloto.ViewModels;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +13,7 @@ namespace CoPiloto
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            NavigationService.Current.SetarMainPage<GetChartViewModel>();
         }
 
         protected override void OnStart()

@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace CoPiloto
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace CoPiloto.Views
 {
-    public partial class MainPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class GetChartPage : ContentPage
     {
-        public MainPage()
+        public GetChartPage()
         {
             InitializeComponent();
         }
