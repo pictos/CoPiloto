@@ -1,32 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using CoPiloto.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CoPiloto.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ChartPage : ContentPage
-	{
-		public ChartPage ()
-		{
-			InitializeComponent ();
-		}
+    public partial class ChartPage : ContentPage
+    {
+        ChartViewModel ViewModel { get => (ChartViewModel)BindingContext; }
 
-        private void Chart_Navigating(object sender, WebNavigatingEventArgs e)
+        public ChartPage()
         {
-            if (e.Url.Contains(".pdf"))
-            {
-                var pdf = new Uri(e.Url);
+            InitializeComponent();
 
-                Device.OpenUri(pdf);
+            pdfWebView.Navigating += PortableDocumentFileViewer_Navigating;
+            pdfWebView.Navigated += PortableDocumentFileViewer_Navigated;
+        }
 
-                e.Cancel = true;
-            }
+        private void PortableDocumentFileViewer_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+            ViewModel.IsBusy = true;
+        }
+
+        private void PortableDocumentFileViewer_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+            ViewModel.IsBusy = false;
         }
     }
 }

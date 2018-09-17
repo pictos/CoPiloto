@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace CoPiloto.ViewModels
 {
     public class ChartViewModel : BaseViewModel
     {
-
-        private string url;
-
+        private string _url;
         public string Url
         {
-            get { return url; }
-            set { SetProperty(ref url, value); }
+            get => $"{(Device.RuntimePlatform.Equals(Device.Android) ? "file:///android_asset/pdfjs/web/viewer.html?file=" : string.Empty)}{_url}";
+            //get => _url;
+            set => SetProperty(ref _url, value, () =>
+            {
+                OnPropertyChanged(nameof(IsPDF));
+            });
         }
+
+        public bool IsPDF { get => _url?.EndsWith("pdf", StringComparison.InvariantCultureIgnoreCase) ?? false; }
 
         public ChartViewModel()
         {

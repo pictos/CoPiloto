@@ -1,4 +1,5 @@
 ﻿using CoPiloto.Services.Navigation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -18,15 +19,14 @@ namespace CoPiloto.ViewModels
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        protected void SetProperty<T>(ref T storage, T value, Action onChanged = null, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
-                return false;
+                return;
 
             storage = value;
+            onChanged?.Invoke();
             OnPropertyChanged(propertyName);
-
-            return true;
         }
 
         public async Task DisplayAlert(string title, string message, string cancel = "Ok") =>
@@ -44,11 +44,8 @@ namespace CoPiloto.ViewModels
         public bool IsBusy
         {
             get { return isBusy; }
-            set
-            {
-                if (SetProperty(ref isBusy, value))
-                    MyChangeCanExecute();
-            }
+            set => SetProperty(ref isBusy, value, () => MyChangeCanExecute());
+
         }
 
         protected virtual void MyChangeCanExecute() { }
