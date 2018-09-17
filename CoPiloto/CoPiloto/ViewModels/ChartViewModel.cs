@@ -16,7 +16,10 @@ namespace CoPiloto.ViewModels
             set { SetProperty(ref url, value); }
         }
 
-        public ChartViewModel() { }
+        public ChartViewModel()
+        {
+            Title = "Carta";
+        }
 
         public override Task InitializeAsync(object[] args)
         {

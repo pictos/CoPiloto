@@ -16,5 +16,17 @@ namespace CoPiloto.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void Chart_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+            if (e.Url.Contains(".pdf"))
+            {
+                var pdf = new Uri(e.Url);
+
+                Device.OpenUri(pdf);
+
+                e.Cancel = true;
+            }
+        }
+    }
 }

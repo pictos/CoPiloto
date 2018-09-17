@@ -20,7 +20,13 @@
             <Button Text        ="Pesquisar"
                     Command     ="{Binding SearchCommand}"
                     Grid.Column ="1"/>
-            
+
+            <ActivityIndicator Grid.Row="1"
+                               Grid.ColumnSpan="2"
+                               IsVisible="{Binding IsBusy}"
+                               IsRunning="{Binding IsBusy}"
+                               IsEnabled="{Binding IsBusy}"/>
+
             <ListView ItemsSource     ="{Binding }"
                       Grid.Row        ="1"
                       Grid.ColumnSpan ="2">
