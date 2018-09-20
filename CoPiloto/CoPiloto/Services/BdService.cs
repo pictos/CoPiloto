@@ -11,7 +11,6 @@ namespace CoPiloto.Services
     {
         static Lazy<BdService> BdLazy = new Lazy<BdService>(() => new BdService());
 
-
         private SQLiteConnection Connection;
 
         public static BdService Current => BdLazy.Value;
@@ -24,6 +23,7 @@ namespace CoPiloto.Services
             Connection.CreateTable<AiportHistory>();
         }
 
+        #region Queries
         public T GetItem<T>(int id) where T : IBusinessEntity, new()
         {
             var query = Connection.Table<T>().FirstOrDefault(c => c.Id == id);
@@ -66,6 +66,7 @@ namespace CoPiloto.Services
         public void Dispose()
         {
             Connection.Dispose();
-        }
+        } 
+        #endregion
     }
 }
