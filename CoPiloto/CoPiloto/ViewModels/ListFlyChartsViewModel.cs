@@ -1,9 +1,7 @@
 ﻿using CoPiloto.Extentions;
 using CoPiloto.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -21,10 +19,17 @@ namespace CoPiloto.ViewModels
 
         #endregion
 
-        public override Task InitializeAsync(object[] args)
+        public async override Task InitializeAsync(object[] args)
         {
             info      = (Info)args[0];
             var chart = (Charts)args[1];
+
+            if (chart is null)
+            {
+                await DisplayAlert("Aviso", $"Nenhuma carta encontrada para o {info.Name}");
+                await Navigation.PopAsync();
+                return;
+            }
 
             var teste = chart.Approach;
 
@@ -33,13 +38,10 @@ namespace CoPiloto.ViewModels
             MyCharts.AddRange(chart.General);
             MyCharts.AddRange(chart.Star);
 
-            return base.InitializeAsync(args);
         }
 
-        protected override void MyChangeCanExecute()
-        {
+        protected override void MyChangeCanExecute() => 
             ChartSelectedCommand.ChangeCanExecute();
-        }
 
         public ListFlyChartsViewModel()
         {

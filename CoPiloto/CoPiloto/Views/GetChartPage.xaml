@@ -27,12 +27,13 @@
                                IsRunning="{Binding IsBusy}"
                                IsEnabled="{Binding IsBusy}"/>
 
-            <ListView ItemsSource     ="{Binding }"
+            <ListView ItemsSource     ="{Binding Histories}"
                       Grid.Row        ="1"
-                      Grid.ColumnSpan ="2">
+                      Grid.ColumnSpan ="2"
+                      ItemTapped      ="ListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        
+                        <TextCell Text="{Binding Icao}"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

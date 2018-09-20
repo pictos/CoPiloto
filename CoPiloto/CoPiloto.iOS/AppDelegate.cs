@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using CoPiloto.Services;
 using Foundation;
 using UIKit;
 
@@ -23,6 +23,7 @@ namespace CoPiloto.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Const.Root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

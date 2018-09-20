@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using CoPiloto.Services;
 
 namespace CoPiloto.Droid
 {
@@ -16,6 +17,9 @@ namespace CoPiloto.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
+
+            Const.Root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

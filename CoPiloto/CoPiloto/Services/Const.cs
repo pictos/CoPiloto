@@ -4,8 +4,10 @@ using System.Text;
 
 namespace CoPiloto.Services
 {
-    class Const
+    public class Const
     {
         public const string Url = "https://api.aircharts.org/v2/Airport/{0}";
+
+        public static string Root { get; set; }
     }
 }

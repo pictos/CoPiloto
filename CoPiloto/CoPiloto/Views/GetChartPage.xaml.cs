@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CoPiloto.Models;
+using CoPiloto.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,19 @@ namespace CoPiloto.Views
         public GetChartPage()
         {
             InitializeComponent();
+        }
+
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if(e.Item is AiportHistory ar)
+            {
+                if (BindingContext is GetChartViewModel vm)
+                {
+                    vm.Airport = ar.Icao;
+                    vm.SearchCommand.Execute(null);
+                }
+
+            }
         }
     }
 }

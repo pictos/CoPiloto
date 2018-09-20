@@ -1,7 +1,8 @@
-﻿using CoPiloto.Services;
+﻿using CoPiloto.Models;
+using CoPiloto.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,6 +12,7 @@ namespace CoPiloto.ViewModels
     {
         #region Properties
 
+        public ObservableCollection<AiportHistory> Histories { get; }
 
         private string airport;
 
@@ -28,6 +30,18 @@ namespace CoPiloto.ViewModels
         {
             SearchCommand = new AsyncCommand(ExecuteSearchCommand, IsBusyStatus);
             Title         = "Pesquisar Cartas";
+            Histories     = new ObservableCollection<AiportHistory>();
+        }
+
+        public override Task InitializeAsync(object[] args)
+        {
+            Histories.Clear();
+            var items = BdService.Current.GetItems<AiportHistory>();
+
+            foreach (var item in items)
+                Histories.Add(item);
+
+            return base.InitializeAsync(args);
         }
 
         protected override void MyChangeCanExecute()
@@ -44,6 +58,14 @@ namespace CoPiloto.ViewModels
                     IsBusy = true;
                     var (chart, info) = await ChartApi.Current.GetChart(Airport);
 
+                    var item = new AiportHistory { Icao = Airport };
+
+                    if (VerifyRepeated())
+                    {
+                        BdService.Current.SaveItem(item);
+                        Histories.Add(item); 
+                    }
+
                     await Navigation.PushAsync<ListFlyChartsViewModel>(info, chart);
                 }
                 catch (Exception ex)
@@ -57,6 +79,12 @@ namespace CoPiloto.ViewModels
                 }
             }
             return;
+        }
+
+        private bool VerifyRepeated()
+        {
+            var repeated = Histories.Where(x => x.Icao == Airport).ToList();
+            return (repeated.Count > 0) ? false : true;
         }
     }
 }
