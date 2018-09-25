@@ -1,9 +1,11 @@
 ﻿using CoPiloto.Extentions;
 using CoPiloto.Models;
 using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using CoPiloto.Helpers;
 
 namespace CoPiloto.ViewModels
 {
@@ -11,7 +13,7 @@ namespace CoPiloto.ViewModels
     {
         #region Properties
 
-        public ObservableCollection<Approach> MyCharts { get; }
+        public CustomCollection<ChartType> MyCharts { get; }
 
         public Command ChartSelectedCommand { get; }
 
@@ -24,6 +26,8 @@ namespace CoPiloto.ViewModels
             info      = (Info)args[0];
             var chart = (Charts)args[1];
 
+            
+
             if (chart is null)
             {
                 await DisplayAlert("Aviso", $"Nenhuma carta encontrada para o {info.Name}");
@@ -31,12 +35,12 @@ namespace CoPiloto.ViewModels
                 return;
             }
 
-            var teste = chart.Approach;
+            var teste = new ObservableCollection<Approach>(chart.Approach);
 
-            MyCharts.AddRange(chart.Approach);
-            MyCharts.AddRange(chart.Sid);
-            MyCharts.AddRange(chart.General);
-            MyCharts.AddRange(chart.Star);
+            //MyCharts.Add(new ChartType { Type = "General" , Charts = chart.General , IsVisible = false });
+            //MyCharts.Add(new ChartType { Type = "Sid"     , Charts = chart.Sid     , IsVisible = false });
+            MyCharts.Add(new ChartType { Type = "Approach", Charts = teste, IsVisible = false });
+            //MyCharts.Add(new ChartType { Type = "Star"    , Charts = chart.Star    , IsVisible = false });
 
         }
 
@@ -46,7 +50,7 @@ namespace CoPiloto.ViewModels
         public ListFlyChartsViewModel()
         {
             ChartSelectedCommand = new AsyncCommand<string>(ExecuteSelectedChartCommand, IsBusyStatus);
-            MyCharts             = new ObservableCollection<Approach>();
+            MyCharts             = new CustomCollection<ChartType>();
         }
 
         async Task ExecuteSelectedChartCommand(string url)
@@ -69,6 +73,13 @@ namespace CoPiloto.ViewModels
                 }
             }
             return;
+        }
+
+        public void ExpandList(ChartType myChart)
+        {
+            var item = MyCharts.SingleOrDefault(x => x.Type == myChart.Type);
+            item.IsVisible = !item.IsVisible;
+            MyCharts.ReportItemChanged(item);
         }
     }
 }

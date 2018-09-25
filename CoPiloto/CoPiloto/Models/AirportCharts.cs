@@ -1,6 +1,7 @@
 ﻿namespace CoPiloto.Models
 {
     using System;
+    using System.Collections.ObjectModel;
     using Newtonsoft.Json;
 
     public partial class AiportCharts
@@ -15,16 +16,16 @@
     public partial class Charts
     {
         [JsonProperty("General")]
-        public Approach[] General { get; set; }
+        public ObservableCollection<Approach> General { get; set; }
 
         [JsonProperty("SID")]
-        public Approach[] Sid { get; set; }
+        public ObservableCollection<Approach> Sid { get; set; }
 
         [JsonProperty("STAR")]
-        public Approach[] Star { get; set; }
+        public ObservableCollection<Approach> Star { get; set; }
 
         [JsonProperty("Approach")]
-        public Approach[] Approach { get; set; }
+        public ObservableCollection<Approach> Approach { get; set; }
     }
 
     public partial class Approach

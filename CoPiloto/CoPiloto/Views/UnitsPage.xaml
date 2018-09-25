@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns   ="http://xamarin.com/schemas/2014/forms"
+             xmlns:x ="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class ="CoPiloto.Views.UnitsPage"
+             Title   ="{Binding Title}">
+
+    <Grid Padding="5">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text              ="Conversão de velocidade"
+               FontAttributes    ="Bold"
+               FontSize          ="Medium"
+               HorizontalOptions ="CenterAndExpand"
+               Grid.ColumnSpan   ="2"/>
+
+        <Label Text           ="Sistema inglês"
+               FontAttributes ="Bold"
+               Grid.Row="1"/>
+       
+        <Label Text           ="Sistema internacional"
+               FontAttributes ="Bold"
+               Grid.Column    ="1"
+               Grid.Row="1"/>
+
+        <Entry Text="{Binding Uk}"
+               Placeholder="Entre com o valor em knots"
+               TextChanged="Entry_TextChanged"
+               Grid.Row="2"/>
+
+        <Entry Text="{Binding SI}"
+               Placeholder="Valor no SI"
+               Grid.Column="1"
+               x:Name="SI"
+               TextChanged="SI_TextChanged"
+               Grid.Row="2"/>
+    </Grid>
+    
+</ContentPage>

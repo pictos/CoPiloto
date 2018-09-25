@@ -21,10 +21,13 @@ namespace CoPiloto.Views
 
         void Charts_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            if (e.Item is null) return;
+            if (e.Item is ChartType chart)
+            {
+                (BindingContext as ListFlyChartsViewModel).ExpandList(chart);
 
-            (BindingContext as ListFlyChartsViewModel).ChartSelectedCommand.Execute(((Approach)e.Item).Url);
+            }
 
+            ((ListView)sender).SelectedItem = null;
         }
     }
 }
