@@ -11,7 +11,6 @@ using Xamarin.Forms.Xaml;
 
 namespace CoPiloto.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListFlyChartsPage : ContentPage
     {
         public ListFlyChartsPage()
@@ -21,11 +20,8 @@ namespace CoPiloto.Views
 
         void Charts_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            if (e.Item is ChartType chart)
-            {
-                (BindingContext as ListFlyChartsViewModel).ExpandList(chart);
-
-            }
+            if (e.Item is LocalChart lc)
+                (BindingContext as ListFlyChartsViewModel)?.ChartSelectedCommand.Execute(lc.Uri);
 
             ((ListView)sender).SelectedItem = null;
         }

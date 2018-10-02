@@ -13,19 +13,26 @@
         public Charts Charts { get; set; }
     }
 
+    public class Caterogia
+    {
+        public string Categoria { get; set; }
+    }
+
     public partial class Charts
     {
         [JsonProperty("General")]
-        public ObservableCollection<Approach> General { get; set; }
+        public ObservableCollection<Approach> General  { get; set; }
 
         [JsonProperty("SID")]
-        public ObservableCollection<Approach> Sid { get; set; }
+        public ObservableCollection<Approach> Sid      { get; set; }
 
         [JsonProperty("STAR")]
-        public ObservableCollection<Approach> Star { get; set; }
+        public ObservableCollection<Approach> Star     { get; set; }
 
         [JsonProperty("Approach")]
         public ObservableCollection<Approach> Approach { get; set; }
+
+       
     }
 
     public partial class Approach
@@ -41,6 +48,9 @@
 
         [JsonProperty("proxy")]
         public string Proxy { get; set; }
+
+        [JsonIgnore]
+        public string Categoria { get; set; }
     }
 
     public partial class Info

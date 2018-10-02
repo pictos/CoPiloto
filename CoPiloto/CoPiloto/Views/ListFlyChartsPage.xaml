@@ -2,52 +2,40 @@
 <ContentPage xmlns   ="http://xamarin.com/schemas/2014/forms"
              xmlns:x ="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class ="CoPiloto.Views.ListFlyChartsPage"
-             Title   ="{Binding Title}">
+             Title   ="{Binding Title}"
+             x:Name  ="Page">
 
-    <ListView ItemsSource ="{Binding MyCharts}"
-              x:Name      ="Charts"
-              ItemTapped  ="Charts_ItemTapped"
-              HasUnevenRows="True">
+    <ListView ItemsSource       ="{Binding MyCharts}"
+              CachingStrategy   ="RecycleElement"
+              IsGroupingEnabled ="True"
+              ItemTapped        ="Charts_ItemTapped"
+              x:Name            ="Charts">
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ContentView>
+                        <Label Text            ="{Binding Key.Category.Title}"
+                               FontAttributes  ="Bold"
+                               FontSize        ="Medium"
+                               VerticalOptions ="Center"/>
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={x:Reference Page}, Path=BindingContext.ShowCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                        </ContentView.GestureRecognizers>
+                    </ContentView>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <ListView ItemsSource="{Binding Charts}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Chartname}"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                <ViewCell>
+                    <ContentView>
+                        <Label Text="{Binding ChartName}"/>
+                    </ContentView>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
 </ContentPage>
 
 
-<!--<ViewCell>
-    <StackLayout>
-        <Grid Padding="15">
-            <Label Text           ="{Binding Type}"
-                               FontAttributes ="Bold"
-                               FontSize       ="Medium"/>
-        </Grid>
-
-        <Grid IsVisible     ="{Binding IsVisible}"
-                              HeightRequest ="{Binding ChildrenRequest}">
-            <ListView ItemsSource="{Binding Charts}"
-                                      SeparatorVisibility="None"
-                                      HasUnevenRows="False">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout>
-                                <Label Text="{Binding Chartname}"
-                                                       FontAttributes="Bold"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
-
-    </StackLayout>
-</ViewCell>-->

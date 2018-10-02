@@ -5,14 +5,19 @@ using System.Text;
 
 namespace CoPiloto.Models
 {
-    public class ChartType
+    public class LocalChart
     {
-        public string Type { get; set; }
+        public string Uri { get; set; }
 
-        public ObservableCollection<Approach> Charts { get; set; }
+        public string ChartName { get; set; }
 
-        public bool IsVisible { get; set; }
+        public Category Category { get; set; }
+    }
 
-        public int ChildrenRequest => Charts?.Count * 50 ?? 0;
+    public class Category
+    {
+        public int CategoryId { get; set; }
+
+        public string Title { get; set; }
     }
 }

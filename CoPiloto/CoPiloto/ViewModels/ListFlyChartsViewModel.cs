@@ -6,16 +6,31 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using CoPiloto.Helpers;
+using Xamarin.Forms.Internals;
 
 namespace CoPiloto.ViewModels
 {
+    public class SelectedHeaderViewModel
+    {
+        public bool IsSelected { get; set; }
+
+        public Category Category { get; set; }
+
+        //public Charts Charts { get; set; }
+    }
+
+
     public class ListFlyChartsViewModel : BaseViewModel
     {
         #region Properties
 
-        public CustomCollection<ChartType> MyCharts { get; }
+        public ObservableCollection<Grouping<SelectedHeaderViewModel, LocalChart>> MyCharts { get; }
+
+        public Command<Grouping<SelectedHeaderViewModel, LocalChart>> ShowCommand { get; }
 
         public Command ChartSelectedCommand { get; }
+
+        ObservableCollection<LocalChart> local;
 
         Info info;
 
@@ -26,6 +41,17 @@ namespace CoPiloto.ViewModels
             info      = (Info)args[0];
             var chart = (Charts)args[1];
 
+           
+
+
+            local = Services.ChartApi.Current.PrepareChart(chart);
+
+            var group = local.OrderBy(x => x.Category.CategoryId)
+                             .GroupBy(x => x.Category)
+                             .Select(x => new Grouping<SelectedHeaderViewModel, LocalChart>
+                             (new SelectedHeaderViewModel { IsSelected = false, Category = x.Key }, x));
+
+            group.ForEach(x => MyCharts.Add(x));
             
 
             if (chart is null)
@@ -36,12 +62,6 @@ namespace CoPiloto.ViewModels
             }
 
             var teste = new ObservableCollection<Approach>(chart.Approach);
-
-            //MyCharts.Add(new ChartType { Type = "General" , Charts = chart.General , IsVisible = false });
-            //MyCharts.Add(new ChartType { Type = "Sid"     , Charts = chart.Sid     , IsVisible = false });
-            MyCharts.Add(new ChartType { Type = "Approach", Charts = teste, IsVisible = false });
-            //MyCharts.Add(new ChartType { Type = "Star"    , Charts = chart.Star    , IsVisible = false });
-
         }
 
         protected override void MyChangeCanExecute() => 
@@ -50,7 +70,22 @@ namespace CoPiloto.ViewModels
         public ListFlyChartsViewModel()
         {
             ChartSelectedCommand = new AsyncCommand<string>(ExecuteSelectedChartCommand, IsBusyStatus);
-            MyCharts             = new CustomCollection<ChartType>();
+            ShowCommand          = new Command<Grouping<SelectedHeaderViewModel, LocalChart>>(ExecuteShowCommand);
+            MyCharts             = new ObservableCollection<Grouping<SelectedHeaderViewModel, LocalChart>>();
+
+            Title = "Lista de cartas";
+        }
+
+        void ExecuteShowCommand(Grouping<SelectedHeaderViewModel, LocalChart> obj)
+        {
+            if (obj is null) return;
+
+            obj.Key.IsSelected = !obj.Key.IsSelected;
+
+            if (obj.Count == 0)
+                local.Where(x => (x.Category.CategoryId.Equals(obj.Key.Category.CategoryId))).ForEach(obj.Add);
+            else
+                obj.Clear();
         }
 
         async Task ExecuteSelectedChartCommand(string url)
@@ -75,11 +110,6 @@ namespace CoPiloto.ViewModels
             return;
         }
 
-        public void ExpandList(ChartType myChart)
-        {
-            var item = MyCharts.SingleOrDefault(x => x.Type == myChart.Type);
-            item.IsVisible = !item.IsVisible;
-            MyCharts.ReportItemChanged(item);
-        }
+       
     }
 }

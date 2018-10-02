@@ -1,6 +1,9 @@
 ﻿using CoPiloto.Models;
+using CoPiloto.ViewModels;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -14,6 +17,10 @@ namespace CoPiloto.Services
 
         HttpClient Client;
 
+        static readonly Category Sid      = new Category { CategoryId = 1, Title = "Sid" };
+        static readonly Category General  = new Category { CategoryId = 1, Title = "General" };
+        static readonly Category Star     = new Category { CategoryId = 1, Title = "Star" };
+        static readonly Category Approach = new Category { CategoryId = 1, Title = "Approach" };
         ChartApi()
         {
             Client = new HttpClient();
@@ -42,6 +49,57 @@ namespace CoPiloto.Services
 
                 throw;
             }
+        }
+
+        public ObservableCollection<LocalChart> PrepareChart(Charts charts)
+        {
+            var teste = new ObservableCollection<LocalChart>();
+
+            foreach (var item in charts.Approach)
+            {
+                teste.Add(new LocalChart
+                {
+                    Uri = item.Url,
+                    ChartName = item.Chartname,
+                    Category = Approach
+
+                });
+            }
+
+            foreach (var item in charts.Sid)
+            {
+                teste.Add(new LocalChart
+                {
+                    Uri = item.Url,
+                    ChartName = item.Chartname,
+                    Category = Sid
+
+                });
+            }
+
+            foreach (var item in charts.Star)
+            {
+                teste.Add(new LocalChart
+                {
+                    Uri = item.Url,
+                    ChartName = item.Chartname,
+                    Category = Star
+
+                });
+            }
+
+            foreach (var item in charts.General)
+            {
+                teste.Add(new LocalChart
+                {
+                    Uri = item.Url,
+                    ChartName = item.Chartname,
+                    Category = General
+
+                });
+            }
+
+            return teste;
         }
     }
 }
