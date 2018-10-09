@@ -95,7 +95,7 @@ namespace CoPiloto.ViewModels
                 try
                 {
                     IsBusy = true;
-                    await Navigation.PushAsync<ChartViewModel>(url);
+                    await Navigation.PushAsync<ChartViewModel>(false, url);
                 }
                 catch (Exception ex)
                 {

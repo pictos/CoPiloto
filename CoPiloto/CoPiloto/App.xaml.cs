@@ -13,8 +13,8 @@ namespace CoPiloto
         public App()
         {
             InitializeComponent();
-            //MainPage = new Views.UnitsPage();
-            NavigationService.Current.SetarMainPage<GetChartViewModel>();
+            //MainPage = new Views.MDPage();
+            NavigationService.Current.SetarMainPage<SplashViewModel>();
         }
 
         protected override void OnStart()

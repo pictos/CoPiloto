@@ -66,7 +66,7 @@ namespace CoPiloto.ViewModels
                         Histories.Add(item); 
                     }
 
-                    await Navigation.PushAsync<ListFlyChartsViewModel>(info, chart);
+                    await Navigation.PushAsync<ListFlyChartsViewModel>(false, info, chart);
                 }
                 catch (Exception ex)
                 {

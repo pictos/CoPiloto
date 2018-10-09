@@ -11,7 +11,6 @@ using Xamarin.Forms.Xaml;
 
 namespace CoPiloto.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class GetChartPage : ContentPage
     {
         public GetChartPage()
@@ -30,6 +29,8 @@ namespace CoPiloto.Views
                 }
 
             }
+
+            (sender as ListView).SelectedItem = null;
         }
     }
 }

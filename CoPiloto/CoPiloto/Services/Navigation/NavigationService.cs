@@ -1,4 +1,5 @@
 ﻿using CoPiloto.ViewModels;
+using CoPiloto.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,16 +13,34 @@ namespace CoPiloto.Services.Navigation
         static Lazy<NavigationService> LazyNavi = new Lazy<NavigationService>(() => new NavigationService());
         public static NavigationService Current => LazyNavi.Value;
 
-        NavigationService()
-        {
+        NavigationService() => 
             mapeamento = new Dictionary<Type, Type>();
+
+        INavigation Navigation => (App.Current.MainPage.GetType() == typeof(NavigationPage) ?
+            ((NavigationPage)App.Current.MainPage).Navigation :
+            ((NavigationPage)((MDPage)App.Current.MainPage).Detail).Navigation);
+
+        async Task NavigateTo(Page page)
+        {
+            var firstPage = Navigation.NavigationStack[0];
+
+            Navigation.InsertPageBefore(page, firstPage);
+
+            await Navigation.PopToRootAsync();
+
+            ((MDPage)App.Current.MainPage).IsPresented = false;
         }
 
-        public async Task PushAsync<TViewModel>(params object[] args) where TViewModel : BaseViewModel
+        public async Task PushAsync<TViewModel>(bool MD = false, params object[] args) where TViewModel : BaseViewModel
         {
             var page = Locator<TViewModel>(args);
 
-            await Application.Current.MainPage.Navigation.PushAsync(page);
+            if (MD)
+                await NavigateTo(page);
+            else
+                await Navigation.PushAsync(page);
+
+
             await (page.BindingContext as BaseViewModel).InitializeAsync(args);
         }
         Page Locator<TViewModel>(object[] args) where TViewModel : BaseViewModel
@@ -65,6 +84,13 @@ namespace CoPiloto.Services.Navigation
             await (page.BindingContext as BaseViewModel).InitializeAsync(args);
         }
 
+        internal void InitMD()
+        {
+            //App.Current.MainPage = null;
+            App.Current.MainPage = new MDPage();
+        }
+
+
         public async Task PopModalAsync()
             => await Application.Current.MainPage.Navigation.PopModalAsync();
 
@@ -86,9 +112,10 @@ namespace CoPiloto.Services.Navigation
         public void SetarMainPage<TViewModel>(object[] args = null) where TViewModel : BaseViewModel
         {
             var page = Locator<TViewModel>(args);
-            if (App.Current.MainPage == null)
+           
+            if(App.Current.MainPage is null)
             {
-                App.Current.MainPage = new NavigationPage(page);
+                App.Current.MainPage =  new NavigationPage(page);
 
                 (page.BindingContext as BaseViewModel).InitializeAsync(args);
             }
