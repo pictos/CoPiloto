@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:template="clr-namespace:CoPiloto.Views.Templates"
+             x:Class="CoPiloto.Views.CreateFPPage"
+             Title="Criar plano de Voo">
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Text="Origem: "
+                   FontAttributes="Bold"
+                   Margin="0,0,0,-50"/>
+
+                <Entry Text="{Binding Departue}"
+                   Placeholder="ICAO"
+                   Grid.Row="1"/>
+
+                <Label Text="Destino: "
+                   FontAttributes="Bold"
+                   Grid.Column="1"/>
+
+                <Entry Text="{Binding Destination}"
+                   Placeholder="ICAO"
+                   Grid.Row="1"
+                   Grid.Column="1"/>
+
+
+                <!--<template:FPView AltitudeText="{Binding AltitudeC}"
+                                 PlaceholderAltitude="35000 ft"
+                                 LabelText="Cruzeiro"
+                                 SpeedText="{Binding SpeedC}"
+                                 PlaceholderSpeed="420 kts"
+                                 Grid.Row="4"
+                                 Grid.ColumnSpan="2"/>-->
+
+
+                <ActivityIndicator IsVisible="{Binding IsBusy}"
+                                   IsEnabled="{Binding IsBusy}"
+                                   IsRunning="{Binding IsBusy}"
+                                   Grid.RowSpan="3"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
+
+                <StackLayout Grid.Row="2"
+                             Grid.ColumnSpan="2"
+                             Margin="0,20">
+
+                    <template:FPView AltitudeText="{Binding AltitudeA}"
+                                     PlaceholderAltitude="2500 ft/min"
+                                     LabelText="Subida"
+                                     SpeedText="{Binding SpeedA}"
+                                     PlaceholderSpeed="250 kts"/>
+
+                    <template:FPView AltitudeText="{Binding AltitudeC}"
+                                     PlaceholderAltitude="35000 ft"
+                                     LabelText="Cruzeiro"
+                                     SpeedText="{Binding SpeedC}"
+                                     PlaceholderSpeed="420 kts"/>
+
+                    <template:FPView AltitudeText="{Binding AltitudeD}"
+                                 PlaceholderAltitude="1500 ft/min"
+                                 LabelText="Descida"
+                                 SpeedText="{Binding SpeedD}"
+                                 PlaceholderSpeed="250 kts"/>
+
+                    <Button Text="Criar Plano"
+                            Command="{Binding CreateFPCommand}"/>
+
+                </StackLayout>
+
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

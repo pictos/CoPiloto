@@ -12,6 +12,7 @@ namespace CoPiloto
     {
         public App()
         {
+            LiveReload.Init();
             InitializeComponent();
             //MainPage = new Views.MDPage();
             NavigationService.Current.SetarMainPage<SplashViewModel>();

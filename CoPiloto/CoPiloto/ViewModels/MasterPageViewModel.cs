@@ -45,7 +45,10 @@ namespace CoPiloto.ViewModels
                 case ViewModelType.UnitsViewModel:
                     await Navigation.PushAsync<UnitsViewModel>(true);
                     break;
-              
+                case ViewModelType.FPViewViewModel:
+                    await Navigation.PushAsync<CreateFPViewModel>(true);
+                    break;
+
                 default:
                     return;
             }
@@ -59,6 +62,7 @@ namespace CoPiloto.ViewModels
                 {
                     new PageType { Name = "Pesquisar Cartas", TypePage = ViewModelType.GetChartViewModel},
                     new PageType { Name = "Conversor de Unidades", TypePage = ViewModelType.UnitsViewModel},
+                    new PageType { Name = "Criar plano de voo", TypePage = ViewModelType.FPViewViewModel},
                 };
 
                 foreach (var item in pages)

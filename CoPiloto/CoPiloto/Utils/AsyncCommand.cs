@@ -26,9 +26,6 @@ namespace Xamarin.Forms
 
     public sealed class AsyncCommand<T> : Command
     {
-        //private object executeSelectedChartCommand;
-        //private Func<bool> isBusyStatus;
-
         public AsyncCommand(Func<T, Task> execute, Func<object, bool> canExecute)
             : base(async a => await execute((T)a), (a) => canExecute(a))
         {

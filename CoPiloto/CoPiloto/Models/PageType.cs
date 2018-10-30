@@ -14,6 +14,7 @@ namespace CoPiloto.Models
     public enum ViewModelType
     {
         GetChartViewModel,
-        UnitsViewModel
+        UnitsViewModel,
+        FPViewViewModel
     }
 }

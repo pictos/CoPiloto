@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoPiloto.Views.Templates.FPView">
+  <ContentView.Content>
+        <StackLayout Orientation="Horizontal">
+            
+            <Label x:Name="MyLabel"
+                   HorizontalOptions="Start"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   VerticalOptions="Center"/>
+           
+            <Entry x:Name="Altitude"
+                   HorizontalOptions="CenterAndExpand"
+                   TranslationX="40"/>
+
+            <Entry x:Name="Speed"
+                   HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>
