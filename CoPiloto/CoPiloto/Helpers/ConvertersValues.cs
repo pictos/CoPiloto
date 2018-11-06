@@ -10,6 +10,8 @@ namespace CoPiloto.Helpers
 
         const decimal KnotsToKmH = 1.85M;
 
+        const decimal NmToKm = 1.8532M;
+
         public static decimal AltitudeSI(decimal feets) => feets * feetsConverter;
 
         public static decimal AltitudeUK(decimal meter) => meter / feetsConverter;
@@ -17,5 +19,7 @@ namespace CoPiloto.Helpers
         public static decimal VelocitySI(decimal knots) => knots * KnotsToKmH;
 
         public static decimal VelocityUK(decimal kmh) => kmh / KnotsToKmH;
+
+        public static decimal DistanceSI(decimal nm) => NmToKm * nm;
     }
 }

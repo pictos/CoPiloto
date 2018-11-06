@@ -1,8 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CoPiloto.Views.Templates.FPView">
+             x:Class="CoPiloto.Views.Templates.FPView"
+             x:Name="this">
   <ContentView.Content>
+
+        <!--{Binding Source={x:Reference this}, Path= FieldText}-->
+
         <StackLayout Orientation="Horizontal">
             
             <Label x:Name="MyLabel"
@@ -13,10 +17,12 @@
            
             <Entry x:Name="Altitude"
                    HorizontalOptions="CenterAndExpand"
-                   TranslationX="40"/>
+                   TranslationX="40"
+                   Text="{Binding Source={x:Reference this}, Path=AltitudeText}"/>
 
             <Entry x:Name="Speed"
-                   HorizontalOptions="EndAndExpand"/>
+                   HorizontalOptions="EndAndExpand"
+                   Text="{Binding Source={x:Reference this},Path=SpeedText}"/>
         </StackLayout>
   </ContentView.Content>
 </ContentView>

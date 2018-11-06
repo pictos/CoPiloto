@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPiloto.iOS", "CoPiloto\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPiloto.UWP", "CoPiloto\CoPiloto.UWP\CoPiloto.UWP.csproj", "{1991494B-B7E3-4FC6-B4D5-449CFA4BF1EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoPiloto", "CoPiloto\CoPiloto\CoPiloto.csproj", "{95820581-2179-448C-B44F-398D6FFC3659}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoPiloto", "CoPiloto\CoPiloto\CoPiloto.csproj", "{95820581-2179-448C-B44F-398D6FFC3659}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

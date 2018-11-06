@@ -1,4 +1,5 @@
 ﻿
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace CoPiloto.Views.Templates
@@ -10,22 +11,20 @@ namespace CoPiloto.Views.Templates
             InitializeComponent();
         }
 
-
-        public static readonly BindableProperty AltitudeTextProperty = 
+        public static readonly BindableProperty AltitudeTextProperty =
             BindableProperty.Create(nameof(AltitudeText),
                         typeof(string),
                         typeof(FPView),
                         default(string),
-                        BindingMode.TwoWay,
-                        propertyChanged: OnAltitudeTextChanged);
+                        BindingMode.TwoWay);
 
         public string AltitudeText { get => (string)GetValue(AltitudeTextProperty); set => SetValue(AltitudeTextProperty, value); }
 
-        private static void OnAltitudeTextChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = (FPView)bindable;
-            view.Altitude.Text = (string)newValue;
-        }
+      //  private static void OnAltitudeTextChanged(BindableObject bindable, object oldValue, object newValue)
+      //{
+      //      var view = (FPView)bindable;
+      //      view.Altitude.Text = (string)newValue;
+      //  }
 
 
         public static readonly BindableProperty PlaceholderAltitudeProperty = 
@@ -49,15 +48,15 @@ namespace CoPiloto.Views.Templates
                         typeof(string),
                         typeof(FPView),
                         default(string),
-                        propertyChanged: OnSpeedTextChanged);
+                        BindingMode.TwoWay);
 
         public string SpeedText { get => (string)GetValue(SpeedTextProperty); set => SetValue(SpeedTextProperty, value); }
 
-        private static void OnSpeedTextChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var view = (FPView)bindable;
-            view.Speed.Text = (string)newValue;
-        }
+        //private static void OnSpeedTextChanged(BindableObject bindable, object oldValue, object newValue)
+        //{
+        //    var view = (FPView)bindable;
+        //    view.Speed.Text = (string)newValue;
+        //}
 
 
         public static readonly BindableProperty PlaceholderSpeedProperty = 

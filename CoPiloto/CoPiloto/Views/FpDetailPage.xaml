@@ -3,11 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CoPiloto.Views.FpDetailPage"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <Style x:Key="MasterLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <Grid BackgroundColor="White"
+                  Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout>
+                    <Label Text="Informações gerais"
+                           Style="{x:StaticResource MasterLabel}"/>
+
+                    <Label Text="{Binding FromName}"/>
+
+                    <Label Text="{Binding ToName}"/>
+
+                    <Label Text="{Binding Distance}"/>
+
+                    <Label Text="{Binding MaxAlt}"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="1">
+                    <Label Text="Metar"
+                           Style="{x:StaticResource MasterLabel}"/>
+
+                    <Label Text="{Binding InformationFrom}"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="{Binding MetarFrom}"
+                           Margin="0,0,0,20"/>
+
+                    <Label Text="{Binding InformationTo}"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="{Binding MetarTo}"/>
+                </StackLayout>
+
+                
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

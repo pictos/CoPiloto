@@ -6,7 +6,7 @@
              Title="Criar plano de Voo">
     <ContentPage.Content>
         <ScrollView>
-            <Grid>
+            <Grid Padding="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -29,16 +29,6 @@
                    Placeholder="ICAO"
                    Grid.Row="1"
                    Grid.Column="1"/>
-
-
-                <!--<template:FPView AltitudeText="{Binding AltitudeC}"
-                                 PlaceholderAltitude="35000 ft"
-                                 LabelText="Cruzeiro"
-                                 SpeedText="{Binding SpeedC}"
-                                 PlaceholderSpeed="420 kts"
-                                 Grid.Row="4"
-                                 Grid.ColumnSpan="2"/>-->
-
 
                 <ActivityIndicator IsVisible="{Binding IsBusy}"
                                    IsEnabled="{Binding IsBusy}"
@@ -73,7 +63,6 @@
                             Command="{Binding CreateFPCommand}"/>
 
                 </StackLayout>
-
             </Grid>
         </ScrollView>
     </ContentPage.Content>

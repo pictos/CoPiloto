@@ -67,12 +67,12 @@ namespace CoPiloto.ViewModels
         }
 
 
-        private string AltitudeD;
+        private string altitudeD;
 
-        public string altitudeD
+        public string AltitudeD
         {
-            get { return AltitudeD; }
-            set { SetProperty(ref AltitudeD, value); }
+            get { return altitudeD; }
+            set { SetProperty(ref altitudeD, value); }
         }
 
 
