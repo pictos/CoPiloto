@@ -1,6 +1,7 @@
 ﻿using CoPiloto.Services.Navigation;
 using CoPiloto.ViewModels;
 using System;
+using TK.CustomMap.Api.Google;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +15,7 @@ namespace CoPiloto
         {
             LiveReload.Init();
             InitializeComponent();
+            GmsDirection.Init("AIzaSyDW67S9GCGz-Ys9cahFsQm6VsQfDxNNIkE");
             //MainPage = new Views.MDPage();
             NavigationService.Current.SetarMainPage<SplashViewModel>();
         }

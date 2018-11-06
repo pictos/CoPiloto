@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.CoPiloto">
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
-    <application android:label="CoPiloto.Android"></application>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          android:versionCode="1"
+          android:versionName="1.0"
+          package="com.companyname.CoPiloto">
+  <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="27" />
+  <application android:label="CoPiloto.Android">
+    <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDW67S9GCGz-Ys9cahFsQm6VsQfDxNNIkE" />
+    <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+  </application>
 </manifest>

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CoPiloto.Views.FpDetailPage"
+             xmlns:tkmap="clr-namespace:TK.CustomMap;assembly=TK.CustomMap"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <Style x:Key="MasterLabel" TargetType="Label">
@@ -17,9 +18,9 @@
             <Grid BackgroundColor="White"
                   Padding="10">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="300"/>
                 </Grid.RowDefinitions>
 
                 <StackLayout>
@@ -55,7 +56,10 @@
                     <Label Text="{Binding MetarTo}"/>
                 </StackLayout>
 
-                
+                <tkmap:TKCustomMap Polylines="{Binding Routes}"
+                                   Grid.Row="2"
+                                   HasScrollEnabled="True"
+                                   x:Name="map"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

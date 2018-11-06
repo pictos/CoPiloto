@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using CoPiloto.Services;
+using TK.CustomMap.Droid;
 
 namespace CoPiloto.Droid
 {
@@ -19,7 +20,7 @@ namespace CoPiloto.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             Const.Root = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-
+            TKGoogleMaps.Init(this, savedInstanceState);
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

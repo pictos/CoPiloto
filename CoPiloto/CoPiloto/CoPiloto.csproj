@@ -13,6 +13,7 @@
     <PackageReference Include="APIFP" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="TK.CustomMap" Version="2.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.912540" />
     <PackageReference Include="Xamarin.LiveReload" Version="0.3.27" />
   </ItemGroup>
