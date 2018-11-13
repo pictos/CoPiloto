@@ -86,29 +86,28 @@ namespace CoPiloto.ViewModels
             {
                 var fp = (GenerateResponseFP)args[0];
 
-                Title = $"{fp.FromIcao} para {fp.ToIcao}";
-                FromName = $"Partida: {fp.FromName}";
-                ToName = $"Destino: {fp.ToName}";
-                MaxAlt = $"Altitude máxima: {fp.MaxAltitude}";
-                var kmDistance = ConvertersValues.DistanceSI(decimal.Parse(fp.Distance.ToString())).ToString("{0:N2}");
-                Distance = $"Distância: {fp.Distance.ToString()} nm / {kmDistance} km ";
+                Title          = $"{fp.FromIcao} para {fp.ToIcao}";
+                FromName       = $"Partida: {fp.FromName}";
+                ToName         = $"Destino: {fp.ToName}";
+                MaxAlt         = $"Altitude máxima: {fp.MaxAltitude}";
+                var kmDistance = ConvertersValues.DistanceSI(decimal.Parse(fp.Distance.ToString())).ToString("#.##",culture);
+                Distance       = $"Distância: {fp.Distance.ToString("#.##",culture)} nm / {kmDistance} km ";
 
                 InformationFrom = fp.FromName;
-                InformationTo = fp.ToName;
+                InformationTo   = fp.ToName;
 
                 CreateLine(fp);
 
                 var metarFrom = await APIFP.FP.Current.GetWheaterAsync(fp.FromIcao);
-                var metarTo = await APIFP.FP.Current.GetWheaterAsync(fp.ToIcao);
-                MetarFrom = metarFrom.Metar;
-                MetarTo = metarTo.Metar;
+                var metarTo   = await APIFP.FP.Current.GetWheaterAsync(fp.ToIcao);
+                MetarFrom     = metarFrom.Metar;
+                MetarTo       = metarTo.Metar;
 
                 OnPropertyChanged(nameof(InformationFrom));
                 OnPropertyChanged(nameof(InformationTo));
             }
             catch (Exception ex)
             {
-
                 await DisplayAlert("Erro", ex.Message);
             }
             

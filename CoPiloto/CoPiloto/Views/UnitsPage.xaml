@@ -1,10 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns   ="http://xamarin.com/schemas/2014/forms"
              xmlns:x ="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:CoPiloto.Views.Templates"
              x:Class ="CoPiloto.Views.UnitsPage"
              Title   ="{Binding Title}">
 
-    <Grid Padding="5">
+
+    <StackLayout>
+        <local:ConverterView UnitLeft="{Binding ALeft}"
+                             UnitName="Altitude"
+                             UnitRight="{Binding ARight}"/>
+
+        <local:ConverterView UnitName="Velocidade"
+                             UnitLeft="{Binding VLeft}"
+                             UnitRight="{Binding VRight}"/>
+
+    </StackLayout>
+    
+    
+    
+    
+    
+    
+    <!--<Grid Padding="5">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -37,6 +55,6 @@
                x:Name="SI"
                TextChanged="SI_TextChanged"
                Grid.Row="2"/>
-    </Grid>
+    </Grid>-->
     
 </ContentPage>

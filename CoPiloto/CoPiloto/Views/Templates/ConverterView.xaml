@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoPiloto.Views.Templates.ConverterView"
+             x:Name="this">
+  <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Label x:Name="Title"
+                   FontAttributes="Bold"
+                   FontSize="Medium"
+                   Grid.ColumnSpan="2"
+                   Text="{Binding Source={x:Reference this}, Path=UnitName}"/>
+
+            <Entry x:Name="UF"
+                   Grid.Row="1"
+                   Text="{Binding Source={x:Reference this}, Path=UnitLeft}"/>
+
+            <Entry x:Name="UR"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Text="{Binding Source={x:Reference this}, Path=UnitRight}"/>
+        </Grid>
+  </ContentView.Content>
+</ContentView>

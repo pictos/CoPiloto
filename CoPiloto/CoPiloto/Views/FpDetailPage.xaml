@@ -12,7 +12,7 @@
             <Setter Property="Margin" Value="0,10"/>
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <ScrollView>
             <Grid BackgroundColor="White"
@@ -45,15 +45,28 @@
                            FontAttributes="Bold"
                            HorizontalOptions="Center"/>
 
-                    <Label Text="{Binding MetarFrom}"
-                           Margin="0,0,0,20"/>
+                    <Label Margin="0,0,0,20">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Metar: "/>
+                                <Span Text="{Binding MetarFrom, Mode=TwoWay}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
 
                     <Label Text="{Binding InformationTo}"
                            FontSize="Medium"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"/>
 
-                    <Label Text="{Binding MetarTo}"/>
+                    <Label Margin="0,0,0,20">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Metar: "/>
+                                <Span Text="{Binding MetarTo,Mode=TwoWay}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </StackLayout>
 
                 <tkmap:TKCustomMap Polylines="{Binding Routes}"

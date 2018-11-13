@@ -34,6 +34,7 @@ namespace CoPiloto.Views
         {
             if (e.NewTextValue.StartsWith("0") || string.IsNullOrEmpty(e.NewTextValue))
                 return;
+
             if (BindingContext is UnitsViewModel vm)
                 vm.Calculate(decimal.Parse(e.NewTextValue), false);
         }

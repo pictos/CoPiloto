@@ -89,8 +89,7 @@ namespace CoPiloto.ViewModels
         public Command CreateFPCommand { get; }
 
         public override Task InitializeAsync(object[] args)
-        {
-            AltitudeC = "35000";
+        {           
             FP.Current.Init();
             return base.InitializeAsync(args);
         }
@@ -107,6 +106,7 @@ namespace CoPiloto.ViewModels
                 try
                 {
                     IsBusy = true;
+                    AltitudeC = string.IsNullOrEmpty(AltitudeC) ? "35000" : AltitudeC;
                     var fp = new GenerateFP
                     {
                         FromIcao    = Departue,
@@ -121,7 +121,6 @@ namespace CoPiloto.ViewModels
                 }
                 catch (Exception ex)
                 {
-
                     await DisplayAlert("Erro", $"Erro:{ex.Message}", "Ok");
                 }
                 finally

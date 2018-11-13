@@ -13,6 +13,9 @@ namespace CoPiloto.Views
         {
             Detail = new NavigationPage(new GetChartPage() { BindingContext = Vm });
             Master = new MasterPage();
+
+            if (Device.RuntimePlatform == Device.UWP)
+                MasterBehavior = MasterBehavior.Popover;
         }
 
         protected async override void OnAppearing()

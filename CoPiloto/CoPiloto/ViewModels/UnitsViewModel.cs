@@ -1,5 +1,5 @@
 ﻿using CoPiloto.Helpers;
-using System;
+using Xamarin.Forms;
 using System.Collections.Generic;
 using System.Text;
 
@@ -31,7 +31,7 @@ namespace CoPiloto.ViewModels
 
         public UnitsViewModel()
         {
-
+            Title = "Conversor de unidades";
         }
 
 
