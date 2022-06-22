@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.10.0" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.10.0" />
     <PackageReference Include="Microsoft.AppCenter.Distribute" Version="1.10.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="TK.CustomMap" Version="2.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="3.3.0.967583" />
